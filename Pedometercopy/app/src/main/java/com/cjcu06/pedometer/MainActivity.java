@@ -388,7 +388,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTextViewZ.setText(String.format("%.2f", event.values[Z]));
 
         if(event.values[X]>0){
-            mTextViewX.append("+".toString() + "\n");
+            mTextViewX.setText("+"+mTextViewX.getText().toString());
+        }
+        if(event.values[Y]>0){
+            mTextViewY.setText("+"+mTextViewY.getText().toString());
+        }
+        if(event.values[Z]>0){
+            mTextViewZ.setText("+"+mTextViewZ.getText().toString());
         }
 
        /* mTextViewX.setText(Float.toString(event.values[X]));
@@ -401,36 +407,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btOut.write(mTextViewMsg.getText().toString().getBytes());
                 mTextViewMsg.setText("");
 
-                if (event.values[X] > 0) { //陀螺儀值
-                    mTextViewX.setText(String.format("%.2f", event.values[X]));
 
                     btOut.write(mTextViewX.getText().toString().getBytes());  //將值藉由藍芽傳出
-                } else if (event.values[X] < 0) {
-                    mTextViewX.append( mTextViewX.getText().toString() + "\n");
-                    mTextViewX.setText(String.format("%.2f", event.values[X]));
-                    btOut.write(mTextViewX.getText().toString().getBytes());  //將值藉由藍芽傳出
-                }
 
-                if (event.values[Y] > 0) { //陀螺儀值
-                    mTextViewY.setText(String.format("%.2f", event.values[Y]));
-                    mTextViewY.append("+"+ mTextViewY.getText().toString() + "\n");
                     btOut.write(mTextViewY.getText().toString().getBytes());  //將值藉由藍芽傳出
-                } else if (event.values[Y] < 0) {
-                    mTextViewY.append( mTextViewY.getText().toString() + "\n");
-                    mTextViewY.setText(String.format("%.2f", event.values[Y]));
-                    btOut.write(mTextViewY.getText().toString().getBytes());  //將值藉由藍芽傳出
-                }
 
-                if (event.values[Z] > 0) { //陀螺儀值
-                    mTextViewZ.setText(String.format("%.2f", event.values[Z]));
-                    mTextViewZ.append("+" + mTextViewZ.getText().toString() + "\n");
                     btOut.write(mTextViewZ.getText().toString().getBytes());  //將值藉由藍芽傳出
-                } else if (event.values[Z] < 0) {
-                    mTextViewZ.append  (mTextViewZ.getText().toString() + "\n");
-                    mTextViewZ.setText(String.format("%.2f", event.values[Z]));
-                    btOut.write(mTextViewZ.getText().toString().getBytes());  //將值藉由藍芽傳出
-                }
-            }
+
+}
         }catch (IOException e){
             e.printStackTrace();
         }
