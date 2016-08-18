@@ -387,6 +387,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTextViewY.setText(String.format("%.2f", event.values[Y]));
         mTextViewZ.setText(String.format("%.2f", event.values[Z]));
 
+        if(event.values[X]>0){
+            mTextViewX.append("+".toString() + "\n");
+        }
+
+       /* mTextViewX.setText(Float.toString(event.values[X]));
+        mTextViewY.setText(Float.toString(event.values[Y]));
+        mTextViewZ.setText(Float.toString(event.values[Z]));*/
+
         try {
             if(sppConnected == true) {
                 mTextViewMsg.append(mTextViewMsg.getText().toString() + "\n");
@@ -394,32 +402,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mTextViewMsg.setText("");
 
                 if (event.values[X] > 0) { //陀螺儀值
-                    mTextViewX.append("+" + mTextViewX.getText().toString() + "\n");
-                    mTextViewX.setText(String.format("%.0f", event.values[X]));
+                    mTextViewX.setText(String.format("%.2f", event.values[X]));
+
                     btOut.write(mTextViewX.getText().toString().getBytes());  //將值藉由藍芽傳出
                 } else if (event.values[X] < 0) {
-                    mTextViewX.append("-" + mTextViewX.getText().toString() + "\n");
-                    mTextViewX.setText(String.format("%.0f", event.values[X]));
+                    mTextViewX.append( mTextViewX.getText().toString() + "\n");
+                    mTextViewX.setText(String.format("%.2f", event.values[X]));
                     btOut.write(mTextViewX.getText().toString().getBytes());  //將值藉由藍芽傳出
                 }
 
                 if (event.values[Y] > 0) { //陀螺儀值
-                    mTextViewY.append("+" + mTextViewY.getText().toString() + "\n");
-                    mTextViewY.setText(String.format("%.0f", event.values[Y]));
+                    mTextViewY.setText(String.format("%.2f", event.values[Y]));
+                    mTextViewY.append("+"+ mTextViewY.getText().toString() + "\n");
                     btOut.write(mTextViewY.getText().toString().getBytes());  //將值藉由藍芽傳出
                 } else if (event.values[Y] < 0) {
-                    mTextViewY.append("-" + mTextViewY.getText().toString() + "\n");
-                    mTextViewY.setText(String.format("%.0f", event.values[Y]));
+                    mTextViewY.append( mTextViewY.getText().toString() + "\n");
+                    mTextViewY.setText(String.format("%.2f", event.values[Y]));
                     btOut.write(mTextViewY.getText().toString().getBytes());  //將值藉由藍芽傳出
                 }
 
                 if (event.values[Z] > 0) { //陀螺儀值
+                    mTextViewZ.setText(String.format("%.2f", event.values[Z]));
                     mTextViewZ.append("+" + mTextViewZ.getText().toString() + "\n");
-                    mTextViewZ.setText(String.format("%.0f", event.values[Z]));
                     btOut.write(mTextViewZ.getText().toString().getBytes());  //將值藉由藍芽傳出
                 } else if (event.values[Z] < 0) {
-                    mTextViewZ.append("-" + mTextViewZ.getText().toString() + "\n");
-                    mTextViewZ.setText(String.format("%.0f", event.values[Z]));
+                    mTextViewZ.append  (mTextViewZ.getText().toString() + "\n");
+                    mTextViewZ.setText(String.format("%.2f", event.values[Z]));
                     btOut.write(mTextViewZ.getText().toString().getBytes());  //將值藉由藍芽傳出
                 }
             }
@@ -427,9 +435,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-       /* mTextViewX.setText(Float.toString(event.values[X]));
-        mTextViewY.setText(Float.toString(event.values[Y]));
-        mTextViewZ.setText(Float.toString(event.values[Z]));*/
+
 
         setAccelValue(event);
         float maxValue = getMaxAccel();
