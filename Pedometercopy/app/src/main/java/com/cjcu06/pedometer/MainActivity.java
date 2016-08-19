@@ -79,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private float[] mGravity = {0.0f, 0.0f, 0.0f};
     private float[] mLinearAccel = {0.0f, 0.0f, 0.0f};
 
+    private byte[] Cmd;
+    private TextView mTextViewXByte;
+
 
 
 
@@ -86,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTextViewXByte=(TextView)findViewById(R.id.XBytes);
 
         mButtonConnection=(Button)findViewById(R.id.btn_connection);
        mButtonSearch=(Button)findViewById(R.id.btn_search);
@@ -397,22 +402,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mTextViewZ.setText("+"+mTextViewZ.getText().toString());
         }
 
+
+
+
+       /* Cmd = new byte[23];
+        Cmd[0]=(byte)0xA0;
+        Cmd[1]=(byte)0x58;
+        Cmd[2]=
+        Cmd[8]=(byte)0x59;
+        Cmd[9]=(byte)event.values[Y];
+        Cmd[15]=(byte)0x5A;
+        Cmd[16]=(byte)event.values[Z];
+        Cmd[22]=(byte)0xFB;*/
+
+
+
        /* mTextViewX.setText(Float.toString(event.values[X]));
         mTextViewY.setText(Float.toString(event.values[Y]));
         mTextViewZ.setText(Float.toString(event.values[Z]));*/
 
         try {
             if(sppConnected == true) {
-                mTextViewMsg.append(mTextViewMsg.getText().toString() + "\n");
+                /*mTextViewMsg.append(mTextViewMsg.getText().toString() + "\n");
                 btOut.write(mTextViewMsg.getText().toString().getBytes());
-                mTextViewMsg.setText("");
+                mTextViewMsg.setText("");*/
 
 
-                    btOut.write(mTextViewX.getText().toString().getBytes());  //將值藉由藍芽傳出
+                    btOut.write(Cmd);  //將值藉由藍芽傳出
 
-                    btOut.write(mTextViewY.getText().toString().getBytes());  //將值藉由藍芽傳出
+                   // btOut.write(mTextViewY.getText().toString().getBytes());  //將值藉由藍芽傳出
 
-                    btOut.write(mTextViewZ.getText().toString().getBytes());  //將值藉由藍芽傳出
+                  //  btOut.write(mTextViewZ.getText().toString().getBytes());  //將值藉由藍芽傳出
 
 }
         }catch (IOException e){
