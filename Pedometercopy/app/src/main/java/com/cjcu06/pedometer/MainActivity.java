@@ -28,6 +28,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -402,17 +403,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mTextViewZ.setText("+"+mTextViewZ.getText().toString());
         }
 
+        byte[] b = String.format("%.2f", event.values[X]).getBytes(StandardCharsets.US_ASCII);
+        bytesToHex(b);
 
+        Log.e("view x", "b:"+bytesToHex(b));
 
-
-       /* Cmd = new byte[23];
+     /*   Cmd = new byte[23];
         Cmd[0]=(byte)0xA0;
         Cmd[1]=(byte)0x58;
-        Cmd[2]=
+        Cmd[2]=x;
         Cmd[8]=(byte)0x59;
-        Cmd[9]=(byte)event.values[Y];
+        Cmd[9]=y;
         Cmd[15]=(byte)0x5A;
-        Cmd[16]=(byte)event.values[Z];
+        Cmd[16]=z;
         Cmd[22]=(byte)0xFB;*/
 
 
@@ -537,4 +540,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+    final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+
+    public static String bytesToHex(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for ( int j = 0; j < bytes.length; j++ ) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
+    }
+
 }
