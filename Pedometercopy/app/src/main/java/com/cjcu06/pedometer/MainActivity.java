@@ -80,15 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private float[] mGravity = {0.0f, 0.0f, 0.0f};
     private float[] mLinearAccel = {0.0f, 0.0f, 0.0f};
 
-<<<<<<< HEAD
-    private byte[] cmmd;
-=======
     private byte[] Cmd;
     private TextView mTextViewXByte;
 
 
 
->>>>>>> origin/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -407,24 +403,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mTextViewZ.setText("+"+mTextViewZ.getText().toString());
         }
 
-        byte[] b = String.format("%.2f", event.values[X]).getBytes(StandardCharsets.US_ASCII);
+        byte[] a = String.format("%.2f", event.values[X]).getBytes(StandardCharsets.US_ASCII);
+         bytesToHex(a);
 
+        byte[] b = String.format("%.2f", event.values[Y]).getBytes(StandardCharsets.US_ASCII);
 
-        Log.e("view x", "b:"+bytesToHex(b));
+        byte[] c = String.format("%.2f", event.values[Z]).getBytes(StandardCharsets.US_ASCII);
 
-       /* byte[] x = new byte[6];
-        for(int i=0;i<x.length;i--){
-            byte[6]=
-        }*/
-
+        Log.e("view x", "x:"+bytesToHex(a));
+        Log.e("view a", "a:"+a);
+        Log.e("View a", "a[0]"+a[0]);
+        Log.e("View a", "a[1]"+a[1]);
+        Log.e("View a", "a[2]"+a[2]);
+        Log.e("View a", "a[3]"+a[3]);
+        Log.e("View a", "a[4]"+a[4]);
 
 
         Cmd = new byte[23];
+      for (int i=0;i<=Cmd.length;i++){
+            Cmd[0]=(byte) 0xA0;
+            Cmd[1]=(byte) 0x58;
+
+              Cmd[2]=a[0];
+              Cmd[3]=a[1];
+              Cmd[4]=a[2];
+              Cmd[5]=a[3];
+              Cmd[6]=a[4];
+              Cmd[7]=a[5];
+
+          Cmd[8]=(byte)0x59;
+
+              Cmd[9]=b[0];
+              Cmd[10]=b[1];
+              Cmd[11]=b[2];
+              Cmd[12]=b[3];
+              Cmd[13]=b[4];
+              Cmd[14]=b[5];
+
+          Cmd[15]=(byte)0x5A;
+
+              Cmd[16]=c[0];
+              Cmd[17]=c[1];
+              Cmd[18]=c[2];
+              Cmd[19]=c[3];
+              Cmd[20]=c[4];
+              Cmd[21]=c[4];
+
+          Cmd[22]=(byte)0xFB;
+
+        }
+
+
+
+      /*  Cmd = new byte[23];
         Cmd[0]=(byte)0xA0;
         Cmd[1]=(byte)0x58;
        for (int i=2;i<7;i++){
-           for (int j=0;i<5;i++){
-           Cmd[i]=b[j];
+           for (int j=0;j<=5;j++){
+           Cmd[i]=a[j] ;
            }
        }
         Cmd[8]=(byte)0x59;
@@ -436,17 +472,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.e("Cmd view","CMD:"+Cmd[2]);
         Log.e("Cmd view","CMD:"+Cmd[3]);
         Log.e("Cmd view","CMD:"+Cmd[4]);
-        Log.e("Cmd view","CMD:"+Cmd[1]);
+        Log.e("Cmd view","CMD:"+Cmd[1]);*/
 
 
 
        /* mTextViewX.setText(Float.toString(event.values[X]));
         mTextViewY.setText(Float.toString(event.values[Y]));
         mTextViewZ.setText(Float.toString(event.values[Z]));*/
-
-        cmmd=new byte[19];
-        cmmd[0]=11;
-        cmmd[1]
 
         try {
             if(sppConnected == true) {
