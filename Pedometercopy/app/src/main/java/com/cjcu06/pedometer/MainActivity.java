@@ -79,8 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private float[] mGravity = {0.0f, 0.0f, 0.0f};
     private float[] mLinearAccel = {0.0f, 0.0f, 0.0f};
 
-
-
+    private byte[] cmmd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -400,6 +399,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        /* mTextViewX.setText(Float.toString(event.values[X]));
         mTextViewY.setText(Float.toString(event.values[Y]));
         mTextViewZ.setText(Float.toString(event.values[Z]));*/
+
+        cmmd=new byte[19];
+        cmmd[0]=11;
+        cmmd[1]
 
         try {
             if(sppConnected == true) {
