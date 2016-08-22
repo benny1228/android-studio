@@ -404,19 +404,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         byte[] b = String.format("%.2f", event.values[X]).getBytes(StandardCharsets.US_ASCII);
-        bytesToHex(b);
+
 
         Log.e("view x", "b:"+bytesToHex(b));
 
-     /*   Cmd = new byte[23];
+       /* byte[] x = new byte[6];
+        for(int i=0;i<x.length;i--){
+            byte[6]=
+        }*/
+
+
+
+        Cmd = new byte[23];
         Cmd[0]=(byte)0xA0;
         Cmd[1]=(byte)0x58;
-        Cmd[2]=x;
+       for (int i=2;i<7;i++){
+           for (int j=0;i<5;i++){
+           Cmd[i]=b[j];
+           }
+       }
         Cmd[8]=(byte)0x59;
-        Cmd[9]=y;
+      //  Cmd[9]=y;
         Cmd[15]=(byte)0x5A;
-        Cmd[16]=z;
-        Cmd[22]=(byte)0xFB;*/
+       // Cmd[16]=z;
+        Cmd[22]=(byte)0xFB;
+
+        Log.e("Cmd view","CMD:"+Cmd[2]);
+        Log.e("Cmd view","CMD:"+Cmd[3]);
+        Log.e("Cmd view","CMD:"+Cmd[4]);
+        Log.e("Cmd view","CMD:"+Cmd[1]);
 
 
 
