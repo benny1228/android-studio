@@ -28,6 +28,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -79,12 +80,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private float[] mGravity = {0.0f, 0.0f, 0.0f};
     private float[] mLinearAccel = {0.0f, 0.0f, 0.0f};
 
+<<<<<<< HEAD
     private byte[] cmmd;
+=======
+    private byte[] Cmd;
+    private TextView mTextViewXByte;
+
+
+
+>>>>>>> origin/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTextViewXByte=(TextView)findViewById(R.id.XBytes);
 
         mButtonConnection=(Button)findViewById(R.id.btn_connection);
        mButtonSearch=(Button)findViewById(R.id.btn_search);
@@ -396,6 +407,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mTextViewZ.setText("+"+mTextViewZ.getText().toString());
         }
 
+        byte[] b = String.format("%.2f", event.values[X]).getBytes(StandardCharsets.US_ASCII);
+
+
+        Log.e("view x", "b:"+bytesToHex(b));
+
+       /* byte[] x = new byte[6];
+        for(int i=0;i<x.length;i--){
+            byte[6]=
+        }*/
+
+
+
+        Cmd = new byte[23];
+        Cmd[0]=(byte)0xA0;
+        Cmd[1]=(byte)0x58;
+       for (int i=2;i<7;i++){
+           for (int j=0;i<5;i++){
+           Cmd[i]=b[j];
+           }
+       }
+        Cmd[8]=(byte)0x59;
+      //  Cmd[9]=y;
+        Cmd[15]=(byte)0x5A;
+       // Cmd[16]=z;
+        Cmd[22]=(byte)0xFB;
+
+        Log.e("Cmd view","CMD:"+Cmd[2]);
+        Log.e("Cmd view","CMD:"+Cmd[3]);
+        Log.e("Cmd view","CMD:"+Cmd[4]);
+        Log.e("Cmd view","CMD:"+Cmd[1]);
+
+
+
        /* mTextViewX.setText(Float.toString(event.values[X]));
         mTextViewY.setText(Float.toString(event.values[Y]));
         mTextViewZ.setText(Float.toString(event.values[Z]));*/
@@ -406,16 +450,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             if(sppConnected == true) {
-                mTextViewMsg.append(mTextViewMsg.getText().toString() + "\n");
+                /*mTextViewMsg.append(mTextViewMsg.getText().toString() + "\n");
                 btOut.write(mTextViewMsg.getText().toString().getBytes());
-                mTextViewMsg.setText("");
+                mTextViewMsg.setText("");*/
 
 
-                    btOut.write(mTextViewX.getText().toString().getBytes());  //將值藉由藍芽傳出
+                    btOut.write(Cmd);  //將值藉由藍芽傳出
 
-                    btOut.write(mTextViewY.getText().toString().getBytes());  //將值藉由藍芽傳出
+                   // btOut.write(mTextViewY.getText().toString().getBytes());  //將值藉由藍芽傳出
 
-                    btOut.write(mTextViewZ.getText().toString().getBytes());  //將值藉由藍芽傳出
+                  //  btOut.write(mTextViewZ.getText().toString().getBytes());  //將值藉由藍芽傳出
 
 }
         }catch (IOException e){
@@ -520,4 +564,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+    final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+
+    public static String bytesToHex(byte[] bytes) {
+        char[] hexChars = new char[bytes.length * 2];
+        for ( int j = 0; j < bytes.length; j++ ) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
+    }
+
 }
