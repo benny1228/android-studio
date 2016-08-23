@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private float[] mLinearAccel = {0.0f, 0.0f, 0.0f};
 
     private byte[] Cmd;
-    private TextView mTextViewXByte;
+    private byte[] x, y ,z;
+
 
 
 
@@ -416,55 +417,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.e("View a", "a[1]"+a[1]);
         Log.e("View a", "a[2]"+a[2]);
         Log.e("View a", "a[3]"+a[3]);
-        Log.e("View a", "a[4]"+a[4]);
+
+
+
+        if (a.length<6){
+            x=bluetoothpacket(a);
+        }else if (a.length==6){
+            x=a;
+        }
+
+        if (b.length<6){
+            y=bluetoothpacket(b);
+        }else if (b.length==6){
+            y=b;
+        }
+
+        if (c.length<6){
+            z=bluetoothpacket(c);
+        }else if (c.length==6){
+            z=c;
+        }
 
 
         Cmd = new byte[23];
-      for (int i=0;i<=Cmd.length;i++){
+
             Cmd[0]=(byte) 0xA0;
             Cmd[1]=(byte) 0x58;
 
-             if (a.length==6){
-              Cmd[2]=a[0];
-              Cmd[3]=a[1];
-              Cmd[4]=a[2];
-              Cmd[5]=a[3];
-              Cmd[6]=a[4];
-              Cmd[7]=a[5];}
-          else {
-                 bluetoothpacket(a);
-             }
+        Cmd[2]=x[0];
+        Cmd[3]=x[1];
+        Cmd[4]=x[2];
+        Cmd[5]=x[3];
+        Cmd[6]=x[4];
+        Cmd[7]=x[5];
+
+
 
           Cmd[8]=(byte)0x59;
 
-          if (b.length==6) {
-              Cmd[9] = b[0];
-              Cmd[10] = b[1];
-              Cmd[11] = b[2];
-              Cmd[12] = b[3];
-              Cmd[13] = b[4];
-              Cmd[14] = b[5];
-          }else {
-              bluetoothpacket(b);
-          }
+        Cmd[9]=y[0];
+        Cmd[10]=y[1];
+        Cmd[11]=y[2];
+        Cmd[12]=y[3];
+        Cmd[13]=y[4];
+        Cmd[14]=y[5];
 
           Cmd[15]=(byte)0x5A;
 
-          if (c.length==6) {
-              Cmd[16] = c[0];
-              Cmd[17] = c[1];
-              Cmd[18] = c[2];
-              Cmd[19] = c[3];
-              Cmd[20] = c[4];
-              Cmd[21] = c[4];
-          }else {
-              bluetoothpacket(c);
-          }
+        Cmd[16]=z[0];
+        Cmd[17]=z[1];
+        Cmd[18]=z[2];
+        Cmd[19]=z[3];
+        Cmd[20]=z[4];
+        Cmd[21]=z[5];
 
           Cmd[22]=(byte)0xFB;
 
-        }
-        Log.e("csie cmmd", "cmd:"+Cmd[2]);
+
+        Log.e("csie cmmd", "cmd:"+bytesToHex(Cmd));
 
 
 
