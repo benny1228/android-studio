@@ -84,7 +84,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private byte[] x, y ,z;
 
 
+    private Sensor gyroSensor = null;
+    private TextView mTextViewGSensorX;
+    private TextView mTextViewGSensorY;
+    private TextView mTextViewGSensorZ;
+    private TextView v;
+    private Button button;
+    private static final float NS2S = 1.0f / 1000000000.0f;
+    private float timestamp;
+    private float[] angle = new float[3];
 
+    @SuppressWarnings("deprecation")
 
 
     @Override
@@ -92,7 +102,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        mTextViewGSensorX=(TextView)findViewById(R.id.vx);
+        mTextViewGSensorY=(TextView)findViewById(R.id.vy);
+        mTextViewGSensorZ=(TextView)findViewById(R.id.vz);
 
         mButtonConnection=(Button)findViewById(R.id.btn_connection);
        mButtonSearch=(Button)findViewById(R.id.btn_search);
@@ -475,15 +487,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         Log.e("csie cmmd", "cmd:"+bytesToHex(Cmd));
-
-
-
-      /*
-        Log.e("Cmd view","CMD:"+Cmd[2]);
-        Log.e("Cmd view","CMD:"+Cmd[3]);
-        Log.e("Cmd view","CMD:"+Cmd[4]);
-        Log.e("Cmd view","CMD:"+Cmd[1]);*/
-
 
 
        /* mTextViewX.setText(Float.toString(event.values[X]));
