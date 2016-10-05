@@ -48,5 +48,39 @@
             android:textSize="50px"
             />
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="連線"
+                android:id="@+id/buttonConnection"
+                android:layout_alignBottom="@+id/linearLayout"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="開關"
+                android:id="@+id/buttonOpenClose" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="搜尋"
+                android:id="@+id/buttonSearch" />
+        </LinearLayout>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/uart_btselect" />
+
     </LinearLayout>
+
 </RelativeLayout>
