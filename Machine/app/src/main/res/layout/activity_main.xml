@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="a06.csie.cjcu.machine.MainActivity">
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/ib_about"
+        android:src="@drawable/about"
+        android:background="@null"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignEnd="@+id/linearLayout" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Machine Eye "
+        android:id="@+id/textView"
+        android:textColor="@color/material_deep_teal_500"
+        android:textSize="45dp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/ib_about" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ib_about"
+        android:layout_alignParentStart="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/ib_image"
+            android:layout_weight="1"
+            android:src="@drawable/home"
+            android:background="@null"
+            android:layout_gravity="bottom" />
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/ib_cardboard"
+            android:layout_weight="1"
+            android:src="@drawable/cardboard"
+            android:background="@null"
+            android:layout_gravity="bottom" />
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/ib_sensors"
+            android:layout_weight="1"
+            android:src="@drawable/temp"
+            android:background="@null"
+            android:layout_gravity="bottom" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@drawable/introd"
+        android:layout_alignTop="@+id/linearLayout"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="100dp">
+
+        <TextView
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="長按圖示說明"
+            android:id="@+id/tv_display"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</RelativeLayout>
